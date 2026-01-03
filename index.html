@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Nebula Finance Dashboard</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <div class="nebula-bg"></div>
+
+    <div class="layout">
+      <!-- Sidebar -->
+      <aside class="sidebar glass">
+        <div class="logo">
+          <span class="logo-icon">🌌</span>
+          <span class="logo-text">Nebula Finance</span>
+        </div>
+
+        <nav class="nav">
+          <a href="index.html" class="nav-item active">Dashboard</a>
+          <a href="admin.html" class="nav-item">Admin 🔐</a>
+          <a href="transactions.html" class="nav-item">Transazioni</a>
+        </nav>
+        <div class="admin-toggle">
+          <label class="admin-toggle-label">
+            <span>Modalità admin</span>
+            <input type="password" id="admin-code-input" placeholder="Codice" />
+            <button type="button" id="admin-code-btn">OK</button>
+          </label>
+        </div>
+      </aside>
+
+      <!-- Main content -->
+      <main class="main">
+        <!-- Top bar -->
+        <header class="topbar glass">
+          <div>
+            <h1>Dashboard</h1>
+            <p>Overview delle tue finanze personali</p>
+          </div>
+          <div class="user-chip">
+            <span class="user-avatar">M</span>
+            <div class="user-info">
+              <span class="user-name" id="user-name-label"
+                >Benvenuta Contabile Moran</span
+              >
+              <span class="user-role" id="user-role-label">Sola lettura</span>
+            </div>
+          </div>
+        </header>
+
+        <!-- KPI cards -->
+        <section class="kpi-grid">
+          <div class="card glass kpi-card">
+            <div class="kpi-label">Capitale totale</div>
+            <div class="kpi-value" id="kpi-total-amount">€ 0,00</div>
+            <div class="kpi-sub" id="kpi-last-update">Nessun dato</div>
+          </div>
+
+          <div class="card glass kpi-card">
+            <div class="kpi-label">Operazioni totali</div>
+            <div class="kpi-value" id="kpi-total-ops">0</div>
+            <div class="kpi-sub">Tutte le operazioni registrate</div>
+          </div>
+
+          <div class="card glass kpi-card">
+            <div class="kpi-label">Investimenti</div>
+            <div class="kpi-value" id="kpi-investments">€ 0,00</div>
+            <div class="kpi-sub" id="kpi-investments-share">
+              0% del portafoglio
+            </div>
+          </div>
+
+          <div class="card glass kpi-card">
+            <div class="kpi-label">Lifestyle</div>
+            <div class="kpi-value" id="kpi-lifestyle">€ 0,00</div>
+            <div class="kpi-sub">Spesa totale Lifestyle</div>
+          </div>
+        </section>
+
+        <!-- Charts row -->
+        <section class="charts-grid">
+          <div class="card glass chart-card">
+            <div class="card-header">
+              <h2>Andamento nel tempo</h2>
+              <span class="badge">Line chart</span>
+            </div>
+            <div class="chart-wrapper">
+              <canvas id="line-chart"></canvas>
+            </div>
+          </div>
+
+          <div class="card glass chart-card">
+            <div class="card-header">
+              <h2>Distribuzione per categoria</h2>
+              <span class="badge">Donut</span>
+            </div>
+            <div class="chart-wrapper">
+              <canvas id="donut-chart"></canvas>
+            </div>
+          </div>
+        </section>
+
+        <!-- Table -->
+        <section class="card glass table-card">
+          <div class="card-header">
+            <h2>Ultime transazioni</h2>
+          </div>
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>Data</th>
+                  <th>Descrizione</th>
+                  <th>Categoria</th>
+                  <th>Importo</th>
+                </tr>
+              </thead>
+              <tbody id="tx-table-body">
+                <!-- Righe generate da app.js -->
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <!-- Chart.js + logica frontend -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

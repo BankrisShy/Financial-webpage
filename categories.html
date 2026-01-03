@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Nebula Finance – Categorie</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <div class="nebula-bg"></div>
+
+    <div class="layout">
+      <!-- Sidebar -->
+      <aside class="sidebar glass">
+        <div class="logo">
+          <span class="logo-icon">🌌</span>
+          <span class="logo-text">Nebula Finance</span>
+        </div>
+
+        <nav class="nav">
+          <a href="index.html" class="nav-item">Dashboard</a>
+          <a href="admin.html" class="nav-item">Admin</a>
+          <a href="transactions.html" class="nav-item">Transazioni</a>
+        </nav>
+        <div class="admin-toggle">
+          <label class="admin-toggle-label">
+            <span>Modalità admin</span>
+            <input type="password" id="admin-code-input" placeholder="Codice" />
+            <button type="button" id="admin-code-btn">OK</button>
+          </label>
+        </div>
+      </aside>
+
+      <main class="main">
+        <header class="topbar glass">
+          <div>
+            <h1>Categorie</h1>
+            <p>Gestisci le categorie di spesa e investimento</p>
+          </div>
+        </header>
+
+        <!-- Form nuova categoria -->
+        <section
+          class="card glass"
+          style="margin-bottom: 16px; max-width: 520px"
+        >
+          <div class="card-header">
+            <h2>Nuova categoria</h2>
+          </div>
+          <form class="admin-form admin-form-large" id="cat-form">
+            <div class="form-row">
+              <div class="form-field">
+                <label>Nome categoria</label>
+                <input
+                  type="text"
+                  id="cat-name"
+                  placeholder="es. Investimenti, Lifestyle..."
+                />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-field">
+                <label>Icona (emoji)</label>
+                <input type="text" id="cat-icon" placeholder="es. 🏦, 🧬, 💼" />
+              </div>
+            </div>
+            <button type="submit" class="btn-primary">
+              Aggiungi categoria
+            </button>
+          </form>
+          <div
+            id="cat-message"
+            style="margin-top: 8px; font-size: 0.85rem"
+          ></div>
+        </section>
+
+        <!-- Tabella categorie -->
+        <section class="card glass table-card">
+          <div class="card-header">
+            <h2>Elenco categorie</h2>
+          </div>
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Icona</th>
+                  <th>Nome</th>
+                </tr>
+              </thead>
+              <tbody id="cat-table-body">
+                <!-- Righe generate da app.js -->
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
