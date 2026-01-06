@@ -1,12 +1,14 @@
+// dominio API in produzione
 const API_URL = "https://financial-webpage.onrender.com";
 
+// riconosci la pagina dalla route, non dal nome file
 const path = window.location.pathname;
-const isAdminPage = path.endsWith("admin.html");
-const isDashboardPage = path.endsWith("index.html") || path === "/";
-const isTransactionsPage = path.endsWith("transactions.html");
-const isCategoriesPage = path.endsWith("categories.html");
+const isAdminPage = path === "/admin";
+const isDashboardPage = path === "/" || path === "/index";
+const isTransactionsPage = path === "/transactions";
+const isCategoriesPage = path === "/categories";
 
-const ADMIN_CODE = "210536"; // cambia il codice come vuoi
+const ADMIN_CODE = "210536";
 
 // ======================
 // GESTIONE ADMIN / VIEWER
@@ -61,7 +63,7 @@ if (isAdminPage) {
     const isAdmin = localStorage.getItem("nebula_is_admin") === "true";
     if (!isAdmin) {
       alert("Accesso admin richiesto. Torno alla dashboard.");
-      window.location.href = "index.html";
+      window.location.href = "/";
       return;
     }
 
@@ -133,7 +135,8 @@ if (isDashboardPage) {
     const kpiLastUpdate = document.getElementById("kpi-last-update");
     const kpiTotalOps = document.getElementById("kpi-total-ops");
     const kpiInvestments = document.getElementById("kpi-investments");
-    const kpiInvestmentsShare = document.getElementById("kpi-investments-share");
+    const kpiInvestmentsShare =
+      document.getElementById("kpi-investments-share");
     const kpiLifestyle = document.getElementById("kpi-lifestyle");
 
     if (!tableBody) return;
@@ -199,7 +202,9 @@ if (isDashboardPage) {
 
       const share =
         totalAmount !== 0 ? (totalInvestments / totalAmount) * 100 : 0;
-      kpiInvestmentsShare.textContent = `${share.toFixed(1)}% del portafoglio`;
+      kpiInvestmentsShare.textContent = `${share.toFixed(
+        1
+      )}% del portafoglio`;
 
       if (lastDate) {
         kpiLastUpdate.textContent =
@@ -215,7 +220,6 @@ if (isDashboardPage) {
         kpiLastUpdate.textContent = "Nessun dato";
       }
 
-      // Line chart
       const lineCanvas = document.getElementById("line-chart");
       const donutCanvas = document.getElementById("donut-chart");
 
@@ -263,7 +267,6 @@ if (isDashboardPage) {
         });
       }
 
-      // Donut chart
       if (donutCanvas && data.length > 0) {
         const byCat = {};
         data.forEach((tx) => {
