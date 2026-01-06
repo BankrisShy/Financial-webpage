@@ -1,4 +1,4 @@
-const API_URL = "http://127.0.0.1:5000";
+const API_URL = "https://financial-webpage.onrender.com";
 
 const path = window.location.pathname;
 const isAdminPage = path.endsWith("admin.html");
