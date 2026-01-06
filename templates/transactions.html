@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Nebula Finance – Transazioni</title>
+    <link rel="stylesheet" href="/static/css/style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <div class="nebula-bg"></div>
+
+    <div class="layout">
+      <!-- Sidebar -->
+      <aside class="sidebar glass">
+        <div class="logo">
+          <span class="logo-icon">🌌</span>
+          <span class="logo-text">Nebula Finance</span>
+        </div>
+
+        <nav class="nav">
+          <a href="/" class="nav-item">Dashboard</a>
+          <a href="/admin" class="nav-item">Admin 🔐</a>
+          <a href="/transactions" class="nav-item active">Transazioni</a>
+          <a href="/categories" class="nav-item">Categorie</a>
+        </nav>
+        <div class="admin-toggle">
+          <label class="admin-toggle-label">
+            <span>Modalità admin</span>
+            <input type="password" id="admin-code-input" placeholder="Codice" />
+            <button type="button" id="admin-code-btn">OK</button>
+          </label>
+        </div>
+      </aside>
+
+      <main class="main">
+        <header class="topbar glass">
+          <div>
+            <h1>Transazioni</h1>
+            <p>Lista completa con filtri</p>
+          </div>
+        </header>
+
+        <!-- Filtro -->
+        <section class="card glass" style="margin-bottom: 16px">
+          <div class="card-header">
+            <h2>Filtri</h2>
+          </div>
+          <form class="admin-form admin-form-large" id="tx-filter-form">
+            <div class="form-row">
+              <div class="form-field">
+                <label>Da data</label>
+                <input type="date" id="filter-from-date" />
+              </div>
+              <div class="form-field">
+                <label>A data</label>
+                <input type="date" id="filter-to-date" />
+              </div>
+              <div class="form-field">
+                <label>Categoria</label>
+                <select id="filter-category">
+                  <option value="">Tutte</option>
+                  <!-- opzioni aggiunte da JS -->
+                </select>
+              </div>
+            </div>
+            <button type="submit" class="btn-primary">Applica filtri</button>
+          </form>
+        </section>
+
+        <!-- Tabella transazioni -->
+        <section class="card glass table-card">
+          <div class="card-header">
+            <h2>Transazioni</h2>
+          </div>
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>Data</th>
+                  <th>Descrizione</th>
+                  <th>Categoria</th>
+                  <th>Importo</th>
+                </tr>
+              </thead>
+              <tbody id="tx-table-body-full">
+                <!-- Righe generate da app.js -->
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="/static/js/app.js"></script>
+  </body>
+</html>

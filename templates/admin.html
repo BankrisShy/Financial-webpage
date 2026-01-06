@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Nebula Finance - Admin</title>
+    <link rel="stylesheet" href="/static/css/style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <div class="nebula-bg"></div>
+
+    <div class="layout">
+      <!-- Sidebar condivisa -->
+      <aside class="sidebar glass">
+        <div class="logo">
+          <span class="logo-icon">🌌</span>
+          <span class="logo-text">Nebula Finance</span>
+        </div>
+
+        <nav class="nav">
+          <a href="/" class="nav-item">Dashboard</a>
+          <a href="/admin" class="nav-item active">Admin</a>
+          <a href="/categories" class="nav-item">Categorie</a>
+        </nav>
+        <div class="admin-toggle">
+          <label class="admin-toggle-label">
+            <span>Modalità admin</span>
+            <input type="password" id="admin-code-input" placeholder="Codice" />
+            <button type="button" id="admin-code-btn">OK</button>
+          </label>
+        </div>
+      </aside>
+
+      <main class="main">
+        <header class="topbar glass">
+          <div>
+            <h1>Admin Panel</h1>
+            <p>Inserisci e gestisci le transazioni</p>
+          </div>
+        </header>
+
+        <section class="card glass" style="max-width: 640px">
+          <div class="card-header">
+            <h2>Nuova transazione</h2>
+          </div>
+
+          <form class="admin-form admin-form-large" id="tx-form">
+            <div class="form-row">
+              <div class="form-field">
+                <label>Importo</label>
+                <input type="number" step="0.01" id="amount" name="amount" />
+              </div>
+
+              <div class="form-field">
+                <label>Data</label>
+                <input type="datetime-local" id="date" name="date" />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-field">
+                <label>Categoria</label>
+                <select id="category_id" name="category_id">
+                  <option value="1">🏦 Investimenti</option>
+                  <option value="2">🧬 Lifestyle</option>
+                  <option value="3">💼 Business</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-field">
+                <label>Descrizione</label>
+                <input type="text" id="description" name="description" />
+              </div>
+            </div>
+
+            <button type="submit" class="btn-primary">Salva transazione</button>
+          </form>
+          <div id="tx-message"></div>
+        </section>
+      </main>
+    </div>
+
+    <script src="/static/js/app.js"></script>
+  </body>
+</html>

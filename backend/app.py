@@ -1,11 +1,43 @@
-from flask import Flask, jsonify, request
-from flask_cors import CORS
+import os
 from datetime import datetime
-from db_conn import get_conn
 
-app = Flask(__name__)
-CORS(app)  # abilita CORS per tutte le origin, semplice e diretto.[web:180][web:192]
+from flask import Flask, jsonify, request, render_template
+from flask_cors import CORS
 
+from db_conn import get_conn  # db_conn.py è nella stessa cartella di app.py
+
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+TEMPLATES_DIR = os.path.join(BASE_DIR, "templates")
+STATIC_DIR = os.path.join(BASE_DIR, "static")
+
+app = Flask(__name__, template_folder=TEMPLATES_DIR, static_folder=STATIC_DIR)
+CORS(app)
+
+
+# ------- PAGINE FRONTEND -------
+
+@app.route("/")
+def index_page():
+    return render_template("index.html")
+
+
+@app.route("/admin")
+def admin_page():
+    return render_template("admin.html")
+
+
+@app.route("/transactions")
+def transactions_page():
+    return render_template("transactions.html")
+
+
+@app.route("/categories")
+def categories_page():
+    return render_template("categories.html")
+
+
+# ------- API CATEGORIES -------
 
 @app.route("/api/categories", methods=["GET"])
 def get_categories():
@@ -16,6 +48,7 @@ def get_categories():
     cur.close()
     conn.close()
     return jsonify(rows)
+
 
 @app.route("/api/categories", methods=["POST"])
 def create_category():
@@ -29,7 +62,6 @@ def create_category():
     conn = get_conn()
     cur = conn.cursor()
 
-    # opzionale: evita duplicati
     cur.execute("SELECT id FROM categories WHERE name = %s", (name,))
     if cur.fetchone() is not None:
         cur.close()
@@ -47,6 +79,8 @@ def create_category():
 
     return jsonify({"id": new_id, "name": name, "icon": icon}), 201
 
+
+# ------- API TRANSACTIONS -------
 
 @app.route("/api/transactions", methods=["GET"])
 def get_transactions():
@@ -71,20 +105,21 @@ def get_transactions():
     cur.close()
     conn.close()
 
-    # adatta il formato per il frontend
     result = []
     for r in rows:
-        result.append({
-            "id": r["id"],
-            "amount": float(r["amount"]),
-            "description": r["description"],
-            "date": r["date"].isoformat(),
-            "category": {
-                "id": r["category_id"],
-                "name": r["category_name"],
-                "icon": r["category_icon"],
-            },
-        })
+        result.append(
+            {
+                "id": r["id"],
+                "amount": float(r["amount"]),
+                "description": r["description"],
+                "date": r["date"].isoformat(),
+                "category": {
+                    "id": r["category_id"],
+                    "name": r["category_name"],
+                    "icon": r["category_icon"],
+                },
+            }
+        )
     return jsonify(result)
 
 
@@ -107,7 +142,6 @@ def create_transaction():
     conn = get_conn()
     cur = conn.cursor()
 
-    # verifica categoria
     cur.execute("SELECT id FROM categories WHERE id = %s", (category_id,))
     if cur.fetchone() is None:
         cur.close()
